@@ -5,7 +5,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	//"os"
+	"os"
 	"path"
 	"regexp"
 )
@@ -21,19 +21,15 @@ type combo_field struct {
 
 func main() {
 
-	//port := os.Getenv("PORT")
-	port := "8080"
+	port := os.Getenv("PORT")
+	//port := "8080"
 	fmt.Println("Port it " + port)
 	if port == "" {
 		log.Fatal("$PORT must be set")
 	}
 
 	mux := http.NewServeMux()
-	mux.Handle("/",
-		handlers.Methods{
-			http.MethodGet: http.HandlerFunc(main_page),
-		},
-	)
+	mux.Handle("/", http.HandlerFunc(main_page))
 
 	http.ListenAndServe(":"+port, mux)
 }
