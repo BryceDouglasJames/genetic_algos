@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
+	"os"
 	"path"
 	"regexp"
 )
@@ -19,7 +21,14 @@ type combo_field struct {
 
 func main() {
 	http.HandleFunc("/", main_page)
-	http.ListenAndServe(":8080", nil)
+
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
+	http.ListenAndServe(port, nil)
 }
 
 func main_page(w http.ResponseWriter, r *http.Request) {
