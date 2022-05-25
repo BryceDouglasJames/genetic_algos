@@ -28,7 +28,7 @@ func main() {
 		log.Fatal("$PORT must be set")
 	}
 
-	http.ListenAndServe(port, nil)
+	http.ListenAndServe(":"+port, nil)
 }
 
 func main_page(w http.ResponseWriter, r *http.Request) {
