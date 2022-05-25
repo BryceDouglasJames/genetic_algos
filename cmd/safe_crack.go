@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const COMBINATION = "3875307572"
+var COMBINATION = "3875307572"
 
 var trace = false
 var attempt = "0000000000"
@@ -49,8 +49,10 @@ func Fitness_Function(code []string, attempt []string) int {
 	return temp_score
 }
 
-func Naive_Hill_Climb() {
+func Naive_Hill_Climb(comb string) []string {
 	var count = 0
+	var attempts = ""
+	COMBINATION = comb
 
 	//generate a character slice out of combination
 	combo_list := strings.Split(COMBINATION, "")
@@ -72,8 +74,9 @@ func Naive_Hill_Climb() {
 		//we cant implicitly reassign next_attmempt. Pass-by-value is really funky sometimes.
 		var next_attempt = []string{}
 		next_attempt = append(next_attempt, best_attempt...)
+		attempts = attempts + "\n" + strings.Join(next_attempt, "") + "\n"
 
-		//We will be using the cyrpto package instead...
+		//We will be using the crypto package instead...
 		//rand.Seed(time.Now().UnixNano())
 		//next_index := rand.Intn(len(COMBINATION))
 
@@ -93,11 +96,12 @@ func Naive_Hill_Climb() {
 
 		//if the mutation is better fit, save it.
 		if next_grade > best_fit {
-			fmt.Printf("\nFOUND A BETTER FIT: %d is the last fit, %d is the new best. Found on try #%d!\n", best_fit, next_grade, count)
 			best_attempt = next_attempt
 			best_fit = next_grade
-			fmt.Printf("best is %s\n", strings.Join(best_attempt, ""))
-
+			if trace {
+				fmt.Printf("\nFOUND A BETTER FIT: %d is the last fit, %d is the new best. Found on try #%d!\n", best_fit, next_grade, count)
+				fmt.Printf("\nbest is %s\n", strings.Join(best_attempt, ""))
+			}
 		}
 
 		count += 1
@@ -110,7 +114,10 @@ func Naive_Hill_Climb() {
 		}
 	}
 
-	fmt.Printf("\nThis is the best attempt: %s\nCracked in %d attempts\nBest fit was %d\n", best_attempt, count, best_fit)
+	return []string{fmt.Sprintf("\n%s\n", attempts),
+		fmt.Sprintf("\n%s is the best attempt \n", best_attempt),
+		fmt.Sprintf("\nCracked in %d attempts\n", count)}
+
 }
 
 //go generics are so cool!!!...kinda

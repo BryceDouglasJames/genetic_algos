@@ -1,0 +1,27 @@
+<html>
+    <h1>{{ .Title }}</h1>
+    <h1>{{ .Info }}</h1>
+    <h2>See code on github <a href="https://github.com/BryceDouglasJames/genetic_algos">here</a></h2>
+    <h3>{{ .Error }}</h3>
+    {{if .Submitted}}
+        <form method="POST" id = "main_form" >
+            <label>Please enter 10 pin number</label><br />
+            <input type="text" name="combination"><br />
+            <br></br>
+            <button type="submit" form="main_form" value="Submit">Submit</button>
+        </form>
+        <h2><i>Mutation list</i>:<br></br>{{.Mutations}}</h2>
+        <br></br>
+        <h2>{{.Best_Fit}}</h2>
+        <br></br>
+        <h2>{{.Count}}</h2>
+    {{else}}
+        <form method="POST" id = "main_form" >
+            <label>Please enter 10 pin number</label><br />
+            <input type="text" name="combination"><br />
+            <br></br>
+            <button type="submit" form="main_form" value="Submit">Submit</button>
+        </form>
+    {{end}}
+    
+</html>
