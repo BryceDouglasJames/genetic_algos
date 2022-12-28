@@ -1,5 +1,5 @@
 # genetic_algos
-[See demo](https://gosimplegenetic.herokuapp.com/) - Deployed with Heroku CLI
+[See demo](https://geneticalgos-production.up.railway.app) - Deployed with Railway
 >An attempt to study variations within the larger class of evolutionary algorithms using golang. This may end up being a tool for using genetic algorithms in various applications, but for now this is just to learn new concepts :) Some things learned/still learning were/are:
 
 - Hill Climbing technique
